@@ -38,20 +38,20 @@ jobs:
           npm install --global yarn
           git clone ${{ github.event.inputs.server }} --branch ${{ github.event.inputs.server-branch }} --depth 1 server
           git clone ${{ github.event.inputs.web }} --branch ${{ github.event.inputs.web-branch }} --depth 1 web
-          mkdir "./weebflix.Server.${{ github.event.inputs.version }}"
-          mkdir "./weebflix.Server.${{ github.event.inputs.version }}/build"
-          mkdir "./weebflix.Server.${{ github.event.inputs.version }}/src"
+          mkdir "./libDrive.Server.${{ github.event.inputs.version }}"
+          mkdir "./libDrive.Server.${{ github.event.inputs.version }}/build"
+          mkdir "./libDrive.Server.${{ github.event.inputs.version }}/src"
           cd ./web
           yarn install
           yarn run build
-          mv ./build/* "../weebflix.Server.${{ github.event.inputs.version }}/build"
+          mv ./build/* "../libDrive.Server.${{ github.event.inputs.version }}/build"
           cd ../server
-          mv main.py requirements.txt "../weebflix.Server.${{ github.event.inputs.version }}"
-          mv ./src/* "../weebflix.Server.${{ github.event.inputs.version }}/src"
+          mv main.py requirements.txt "../libDrive.Server.${{ github.event.inputs.version }}"
+          mv ./src/* "../libDrive.Server.${{ github.event.inputs.version }}/src"
           cd ..
-          cp README.md LICENSE "./weebflix.Server.${{ github.event.inputs.version }}"
-          cd "weebflix.Server.${{ github.event.inputs.version }}"
-          tar cvf "../weebflix.Server.${{ github.event.inputs.version }}.tar" *
+          cp README.md LICENSE "./libDrive.Server.${{ github.event.inputs.version }}"
+          cd "libDrive.Server.${{ github.event.inputs.version }}"
+          tar cvf "../libDrive.Server.${{ github.event.inputs.version }}.tar" *
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -59,7 +59,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
           tag_name: ${{ github.event.inputs.version }}
-          release_name: "weebflix ${{ github.event.inputs.version }}"
+          release_name: "libDrive ${{ github.event.inputs.version }}"
           body: ""
           draft: true
           prerelease: false
@@ -70,6 +70,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: "weebflix.Server.${{ github.event.inputs.version }}.tar"
-          asset_name: "weebflix.Server.${{ github.event.inputs.version }}.tar"
+          asset_path: "libDrive.Server.${{ github.event.inputs.version }}.tar"
+          asset_name: "libDrive.Server.${{ github.event.inputs.version }}.tar"
           asset_content_type: application/x-tar
