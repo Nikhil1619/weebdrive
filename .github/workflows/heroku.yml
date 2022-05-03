@@ -37,8 +37,7 @@ jobs:
           echo ${{ github.repository }}
           git clone https://.:${{ secrets.PAT }}@github.com/Toukacloud/myalt heroku
           mkdir ./release
-          url=$(curl -s "https://github.com/anasty17/mirror-leech-telegram-bot/archive/master.tar.gz")
-          curl -L "$url" | tar xvf - -C ./release
+          git clone https://github.com/anasty17/mirror-leech-telegram-bot ./release
           cd heroku
           mv README.md LICENSE .gitignore ../release
           mkdir ../release/.git
