@@ -35,18 +35,12 @@ jobs:
         id: push_to_heroku
         run: |
           echo ${{ github.repository }}
-          git clone https://.:${{ secrets.PAT }}@github.com/${{ secrets.HEROKU_REPOSITRY }} heroku
+          git clone https://.:${{ secrets.PAT }}@github.com/Toukacloud/myalt heroku
           mkdir ./release
-          url=$(curl -s "https://api.github.com/repos/${{ github.repository }}/releases/latest" \
-                  | grep browser_download_url \
-                  | grep libDrive.Server \
-                  | cut -d '"' -f 4)
-          tag=$(curl -s https://api.github.com/repos/${{ github.repository }}/releases/latest \
-                  | grep tag_name \
-                  | cut -d '"' -f 4)
+          url=$(curl -s "https://github.com/anasty17/mirror-leech-telegram-bot/archive/master.tar.gz)
           curl -L "$url" | tar xvf - -C ./release
           cd heroku
-          mv Procfile runtime.txt README.md app.json LICENSE .gitignore ../release
+          mv README.md LICENSE .gitignore ../release
           mkdir ../release/.git
           mv .git/* ../release/.git
           cd ../release
