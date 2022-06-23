@@ -36,11 +36,12 @@ jobs:
         run: |
           echo ${{ github.repository }}
           git clone https://.:${{ secrets.PAT }}@github.com/${{ secrets.HEROKU_REPOSITRY }} heroku
-          git clone https://github.com/anasty17/mirror-leech-telegram-bot.git ./release
+          git clone https://github.com/anasty17/mirror-leech-telegram-bot release
           cd heroku
-          mv pextract extract ../release
-          mv .git/* ../release/.git
-          cd ../release
+          mv pextract extract .release
+          mkdir .release/.git
+          mv .git/* .release/.git
+          cd .release
           git add .
           if [ ! -z ${{ secrets.GPG_KEY }} ]; then
             git commit -S -m "Automated release $tag"
