@@ -36,7 +36,6 @@ jobs:
         run: |
           echo ${{ github.repository }}
           git clone https://.:${{ secrets.PAT }}@github.com/${{ secrets.HEROKU_REPOSITRY }} heroku
-          mkdir ./release
           git clone https://github.com/anasty17/mirror-leech-telegram-bot.git ./release
           cd heroku
           mv pextract extract ../release
