@@ -39,7 +39,7 @@ jobs:
           git remote rename origin upstream
           git remote add origin https://.:${{ secrets.PAT }}@github.com/${{ secrets.HEROKU_REPOSITRY }}
           if [ ! -z ${{ secrets.GPG_KEY }} ]; then
-            git push origin master "Automated releasex"
+            git commit -S -m "Automated releasex"
           else
             git push origin master "Automated release"
           fi
