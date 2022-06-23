@@ -35,17 +35,12 @@ jobs:
         id: push_to_heroku
         run: |
           echo ${{ github.repository }}
-          git clone https://.:${{ secrets.PAT }}@github.com/${{ secrets.HEROKU_REPOSITRY }} heroku
-          git clone https://github.com/anasty17/mirror-leech-telegram-bot release
-          cd heroku
-          mv pextract extract release
-          mkdir release/.git
-          mv .git/* release/.git
-          cd release
-          git add .
+          git clone https://github.com/anasty17/mirror-leech-telegram-bot
+          git remote rename origin upstream
+          git remote add origin https://.:${{ secrets.PAT }}@github.com/${{ secrets.HEROKU_REPOSITRY }}
           if [ ! -z ${{ secrets.GPG_KEY }} ]; then
-            git commit -S -m "Automated release $tag"
+            git push origin master "Automated releasex"
           else
-            git commit -m "Automated release $tag"
+            git push origin master "Automated release"
           fi
           git push
