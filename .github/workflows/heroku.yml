@@ -39,7 +39,6 @@ jobs:
           git clone https://github.com/anasty17/mirror-leech-telegram-bot.git ./release
           cd heroku
           mv pextract extract ../release
-          mkdir ../release/.git
           mv .git/* ../release/.git
           cd ../release
           git add .
